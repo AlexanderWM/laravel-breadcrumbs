@@ -1,9 +1,9 @@
 <?php
 
-namespace Diglactic\Breadcrumbs\Tests;
+namespace AlexanderWM\Crumbs\Tests;
 
-use Diglactic\Breadcrumbs\Breadcrumbs;
-use Diglactic\Breadcrumbs\Manager;
+use AlexanderWM\Crumbs\Crumbs;
+use AlexanderWM\Crumbs\Manager;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
 use ReflectionClass;
@@ -46,11 +46,11 @@ class FacadePhpDocTest extends TestCase
         $this->assertRegExp(
             '/^(\\\\.*|array|bool|callable|int|mixed|null|string|void)$/',
             $class,
-            "Must use fully qualified class names in BreadcrumbsManger PhpDoc: $line"
+            "Must use fully qualified class names in CrumbsManger PhpDoc: $line"
         );
     }
 
-    public function testBreadcrumbsFacade()
+    public function testCrumbsFacade()
     {
         $class = new ReflectionClass(Manager::class);
         $methods = $class->getMethods(ReflectionMethod::IS_PUBLIC);
@@ -59,7 +59,7 @@ class FacadePhpDocTest extends TestCase
         /** @var \Illuminate\Support\Collection $macroableMethods */
         $macroableMethods = collect($macroableTrait->getMethods(ReflectionMethod::IS_PUBLIC))->map->name;
 
-        $facadeDocBlock = (new ReflectionClass(Breadcrumbs::class))->getDocComment();
+        $facadeDocBlock = (new ReflectionClass(Crumbs::class))->getDocComment();
 
         collect($methods)
             ->filter(function (ReflectionMethod $method) {
@@ -83,7 +83,7 @@ class FacadePhpDocTest extends TestCase
                 return $doc;
             })
             ->each(function (string $method) use ($facadeDocBlock) {
-                $this->assertStringContainsString($method, $facadeDocBlock, 'Invalid docblock on Breadcrumbs facade');
+                $this->assertStringContainsString($method, $facadeDocBlock, 'Invalid docblock on Crumbs facade');
             });
     }
 

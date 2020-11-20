@@ -1,13 +1,13 @@
 <?php
 
-namespace Diglactic\Breadcrumbs\Tests;
+namespace AlexanderWM\Crumbs\Tests;
 
-use Diglactic\Breadcrumbs\Breadcrumbs;
+use AlexanderWM\Crumbs\Crumbs;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\Route;
 use LogicException;
 
-// Breadcrumbs::register() was renamed Breadcrumbs::for() in v5.1.0 but is still supported for backwards compatibility.
+// Crumbs::register() was renamed Crumbs::for() in v5.1.0 but is still supported for backwards compatibility.
 // It's not officially deprecated, but may be in the future.
 class RegisterFunctionTest extends TestCase
 {
@@ -22,14 +22,14 @@ class RegisterFunctionTest extends TestCase
         // Home
         Route::name('home')->get('/', $closure);
 
-        Breadcrumbs::register('home', function ($breadcrumbs) {
+        Crumbs::register('home', function ($breadcrumbs) {
             $breadcrumbs->push('Home', route('home'));
         });
 
         // Home > About
         Route::name('about')->get('about', $closure);
 
-        Breadcrumbs::register('about', function ($breadcrumbs) {
+        Crumbs::register('about', function ($breadcrumbs) {
             $breadcrumbs->parent('home');
             $breadcrumbs->push('About', route('about'));
         });
@@ -37,7 +37,7 @@ class RegisterFunctionTest extends TestCase
         // Home > Blog
         Route::name('blog')->get('blog', $closure);
 
-        Breadcrumbs::register('blog', function ($breadcrumbs) {
+        Crumbs::register('blog', function ($breadcrumbs) {
             $breadcrumbs->parent('home');
             $breadcrumbs->push('Blog', route('blog'));
         });
@@ -45,7 +45,7 @@ class RegisterFunctionTest extends TestCase
         // Home > Blog > [Category]
         Route::name('category')->get('blog/category/{category}', $closure);
 
-        Breadcrumbs::register('category', function ($breadcrumbs, $category) {
+        Crumbs::register('category', function ($breadcrumbs, $category) {
             $breadcrumbs->parent('blog');
             $breadcrumbs->push($category->title, route('category', $category->id));
         });
@@ -53,7 +53,7 @@ class RegisterFunctionTest extends TestCase
         // Home > Blog > [Category] > [Post]
         Route::name('post')->get('blog/post/{post}', $closure);
 
-        Breadcrumbs::register('post', function ($breadcrumbs, $post) {
+        Crumbs::register('post', function ($breadcrumbs, $post) {
             $breadcrumbs->parent('category', $post->category);
             $breadcrumbs->push($post->title, route('post', $post->id));
         });
@@ -72,7 +72,7 @@ class RegisterFunctionTest extends TestCase
 
     public function testGenerate()
     {
-        $breadcrumbs = Breadcrumbs::generate('post', $this->post);
+        $breadcrumbs = Crumbs::generate('post', $this->post);
 
         $this->assertCount(4, $breadcrumbs);
 
@@ -91,7 +91,7 @@ class RegisterFunctionTest extends TestCase
 
     public function testRenderHome()
     {
-        $rendered = Breadcrumbs::render('home');
+        $rendered = Crumbs::render('home');
         $html = $rendered->toHtml();
 
         $this->assertInstanceOf(Htmlable::class, $rendered);
@@ -105,7 +105,7 @@ class RegisterFunctionTest extends TestCase
 
     public function testRenderBlog()
     {
-        $html = Breadcrumbs::render('blog')->toHtml();
+        $html = Crumbs::render('blog')->toHtml();
 
         $this->assertXmlStringEqualsXmlString('
             <ol>
@@ -117,7 +117,7 @@ class RegisterFunctionTest extends TestCase
 
     public function testRenderCategory()
     {
-        $html = Breadcrumbs::render('category', $this->category)->toHtml();
+        $html = Crumbs::render('category', $this->category)->toHtml();
 
         $this->assertXmlStringEqualsXmlString('
             <ol>
@@ -130,7 +130,7 @@ class RegisterFunctionTest extends TestCase
 
     public function testRenderPost()
     {
-        $html = Breadcrumbs::render('post', $this->post)->toHtml();
+        $html = Crumbs::render('post', $this->post)->toHtml();
 
         $this->assertXmlStringEqualsXmlString('
             <ol>

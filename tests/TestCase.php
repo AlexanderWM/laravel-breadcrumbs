@@ -1,9 +1,9 @@
 <?php
 
-namespace Diglactic\Breadcrumbs\Tests;
+namespace AlexanderWM\Crumbs\Tests;
 
-use Diglactic\Breadcrumbs\Breadcrumbs;
-use Diglactic\Breadcrumbs\ServiceProvider;
+use AlexanderWM\Crumbs\Crumbs;
+use AlexanderWM\Crumbs\ServiceProvider;
 use Orchestra\Testbench\TestCase as TestbenchTestCase;
 use Spatie\Snapshots\MatchesSnapshots;
 
@@ -21,7 +21,7 @@ abstract class TestCase extends TestbenchTestCase
     protected function getPackageAliases($app)
     {
         return [
-            'Breadcrumbs' => Breadcrumbs::class,
+            'Crumbs' => Crumbs::class,
         ];
     }
 

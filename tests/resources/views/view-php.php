@@ -1,3 +1,3 @@
 <nav>
-    <?= Breadcrumbs::render('category', $category) ?>
+    <?= Crumbs::render('category', $category) ?>
 </nav>

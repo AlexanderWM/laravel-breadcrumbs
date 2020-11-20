@@ -1,11 +1,11 @@
 <?php
 
-namespace Diglactic\Breadcrumbs;
+namespace AlexanderWM\Crumbs;
 
-use Diglactic\Breadcrumbs\Exceptions\DuplicateBreadcrumbException;
-use Diglactic\Breadcrumbs\Exceptions\InvalidBreadcrumbException;
-use Diglactic\Breadcrumbs\Exceptions\UnnamedRouteException;
-use Diglactic\Breadcrumbs\Exceptions\ViewNotSetException;
+use AlexanderWM\Crumbs\Exceptions\DuplicateBreadcrumbException;
+use AlexanderWM\Crumbs\Exceptions\InvalidBreadcrumbException;
+use AlexanderWM\Crumbs\Exceptions\UnnamedRouteException;
+use AlexanderWM\Crumbs\Exceptions\ViewNotSetException;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Collection;
@@ -13,7 +13,7 @@ use Illuminate\Support\HtmlString;
 use Illuminate\Support\Traits\Macroable;
 
 /**
- * The main Breadcrumbs singleton class, responsible for registering, generating and rendering breadcrumbs.
+ * The main Crumbs singleton class, responsible for registering, generating and rendering breadcrumbs.
  */
 class Manager
 {
@@ -68,7 +68,7 @@ class Manager
      * @param callable $callback The callback, which should accept a Generator instance as the first parameter and may
      *     accept additional parameters.
      * @return void
-     * @throws \Diglactic\Breadcrumbs\Exceptions\DuplicateBreadcrumbException If the given name has already been
+     * @throws \AlexanderWM\Crumbs\Exceptions\DuplicateBreadcrumbException If the given name has already been
      *     used.
      */
     public function for(string $name, callable $callback): void
@@ -89,7 +89,7 @@ class Manager
      * @param callable $callback The callback, which should accept a Generator instance as the first parameter and may
      *     accept additional parameters.
      * @return void
-     * @throws \Diglactic\Breadcrumbs\Exceptions\DuplicateBreadcrumbException If the given name has already been
+     * @throws \AlexanderWM\Crumbs\Exceptions\DuplicateBreadcrumbException If the given name has already been
      *     used.
      * @see self::for()
      */
@@ -151,9 +151,9 @@ class Manager
      * @param string|null $name The name of the current page.
      * @param mixed ...$params The parameters to pass to the closure for the current page.
      * @return \Illuminate\Support\Collection The generated breadcrumbs.
-     * @throws \Diglactic\Breadcrumbs\Exceptions\UnnamedRouteException if no name is given and the current route
+     * @throws \AlexanderWM\Crumbs\Exceptions\UnnamedRouteException if no name is given and the current route
      *     doesn't have an associated name.
-     * @throws \Diglactic\Breadcrumbs\Exceptions\InvalidBreadcrumbException if the name is (or any ancestor names
+     * @throws \AlexanderWM\Crumbs\Exceptions\InvalidBreadcrumbException if the name is (or any ancestor names
      *     are) not registered.
      */
     public function generate(string $name = null, ...$params): Collection
@@ -197,9 +197,9 @@ class Manager
      * @param string|null $name The name of the current page.
      * @param mixed ...$params The parameters to pass to the closure for the current page.
      * @return \Illuminate\Support\HtmlString The generated HTML.
-     * @throws \Diglactic\Breadcrumbs\Exceptions\InvalidBreadcrumbException if the name is (or any ancestor names are) not registered.
-     * @throws \Diglactic\Breadcrumbs\Exceptions\UnnamedRouteException if no name is given and the current route doesn't have an associated name.
-     * @throws \Diglactic\Breadcrumbs\Exceptions\ViewNotSetException if no view has been set.
+     * @throws \AlexanderWM\Crumbs\Exceptions\InvalidBreadcrumbException if the name is (or any ancestor names are) not registered.
+     * @throws \AlexanderWM\Crumbs\Exceptions\UnnamedRouteException if no name is given and the current route doesn't have an associated name.
+     * @throws \AlexanderWM\Crumbs\Exceptions\ViewNotSetException if no view has been set.
      */
     public function view(string $view, string $name = null, ...$params): HtmlString
     {
@@ -218,16 +218,16 @@ class Manager
      * @param string|null $name The name of the current page.
      * @param mixed ...$params The parameters to pass to the closure for the current page.
      * @return \Illuminate\Support\HtmlString The generated HTML.
-     * @throws \Diglactic\Breadcrumbs\Exceptions\InvalidBreadcrumbException if the name is (or any ancestor names are) not registered.
-     * @throws \Diglactic\Breadcrumbs\Exceptions\UnnamedRouteException if no name is given and the current route doesn't have an associated name.
-     * @throws \Diglactic\Breadcrumbs\Exceptions\ViewNotSetException if no view has been set.
+     * @throws \AlexanderWM\Crumbs\Exceptions\InvalidBreadcrumbException if the name is (or any ancestor names are) not registered.
+     * @throws \AlexanderWM\Crumbs\Exceptions\UnnamedRouteException if no name is given and the current route doesn't have an associated name.
+     * @throws \AlexanderWM\Crumbs\Exceptions\ViewNotSetException if no view has been set.
      */
     public function render(string $name = null, ...$params): HtmlString
     {
         $view = config('breadcrumbs.view');
 
         if (!$view) {
-            throw new ViewNotSetException('Breadcrumbs view not specified (check config/breadcrumbs.php)');
+            throw new ViewNotSetException('Crumbs view not specified (check config/breadcrumbs.php)');
         }
 
         return $this->view($view, $name, ...$params);
@@ -239,8 +239,8 @@ class Manager
      * Optionally pass a
      *
      * @return \stdClass|null The breadcrumb for the current page.
-     * @throws \Diglactic\Breadcrumbs\Exceptions\UnnamedRouteException if the current route doesn't have an associated name.
-     * @throws \Diglactic\Breadcrumbs\Exceptions\InvalidBreadcrumbException if the name is (or any ancestor names are) not registered.
+     * @throws \AlexanderWM\Crumbs\Exceptions\UnnamedRouteException if the current route doesn't have an associated name.
+     * @throws \AlexanderWM\Crumbs\Exceptions\InvalidBreadcrumbException if the name is (or any ancestor names are) not registered.
      */
     public function current(): ?\stdClass
     {
@@ -259,7 +259,7 @@ class Manager
      * ```
      *
      * @return array A two-element array consisting of the route name (string) and any parameters (array).
-     * @throws \Diglactic\Breadcrumbs\Exceptions\UnnamedRouteException if the current route doesn't have an associated name.
+     * @throws \AlexanderWM\Crumbs\Exceptions\UnnamedRouteException if the current route doesn't have an associated name.
      */
     protected function getCurrentRoute()
     {

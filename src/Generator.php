@@ -1,8 +1,8 @@
 <?php
 
-namespace Diglactic\Breadcrumbs;
+namespace AlexanderWM\Crumbs;
 
-use Diglactic\Breadcrumbs\Exceptions\InvalidBreadcrumbException;
+use AlexanderWM\Crumbs\Exceptions\InvalidBreadcrumbException;
 use Illuminate\Support\Collection;
 
 /**
@@ -14,7 +14,7 @@ use Illuminate\Support\Collection;
 class Generator
 {
     /**
-     * @var Collection Breadcrumbs currently being generated.
+     * @var Collection Crumbs currently being generated.
      */
     protected $breadcrumbs;
 

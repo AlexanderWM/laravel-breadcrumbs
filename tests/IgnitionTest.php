@@ -1,12 +1,12 @@
 <?php
 
-namespace Diglactic\Breadcrumbs\Tests;
+namespace AlexanderWM\Crumbs\Tests;
 
-use Diglactic\Breadcrumbs\Breadcrumbs;
-use Diglactic\Breadcrumbs\Exceptions\DuplicateBreadcrumbException;
-use Diglactic\Breadcrumbs\Exceptions\InvalidBreadcrumbException;
-use Diglactic\Breadcrumbs\Exceptions\UnnamedRouteException;
-use Diglactic\Breadcrumbs\Exceptions\ViewNotSetException;
+use AlexanderWM\Crumbs\Crumbs;
+use AlexanderWM\Crumbs\Exceptions\DuplicateBreadcrumbException;
+use AlexanderWM\Crumbs\Exceptions\InvalidBreadcrumbException;
+use AlexanderWM\Crumbs\Exceptions\UnnamedRouteException;
+use AlexanderWM\Crumbs\Exceptions\ViewNotSetException;
 use ErrorException;
 use Facade\IgnitionContracts\ProvidesSolution;
 use Illuminate\Support\Facades\Config;
@@ -38,11 +38,11 @@ class IgnitionTest extends TestCase
     {
         Config::set('breadcrumbs.files', $files);
 
-        Breadcrumbs::for('duplicate', function () {
+        Crumbs::for('duplicate', function () {
         });
 
         try {
-            Breadcrumbs::for('duplicate', function () {
+            Crumbs::for('duplicate', function () {
             });
             $this->fail('No exception thrown');
         } catch (DuplicateBreadcrumbException $e) {
@@ -56,7 +56,7 @@ class IgnitionTest extends TestCase
         Config::set('breadcrumbs.files', $files);
 
         try {
-            Breadcrumbs::render('invalid');
+            Crumbs::render('invalid');
             $this->fail('No exception thrown');
         } catch (InvalidBreadcrumbException $e) {
             $this->assertSolutionMatchesSnapshot($e);
@@ -69,7 +69,7 @@ class IgnitionTest extends TestCase
         Config::set('breadcrumbs.files', $files);
 
         Route::name('home')->get('/', function () {
-            return Breadcrumbs::render();
+            return Crumbs::render();
         });
 
         try {
@@ -84,12 +84,12 @@ class IgnitionTest extends TestCase
     {
         Config::set('breadcrumbs.view', '');
 
-        Breadcrumbs::for('home', function ($trail) {
+        Crumbs::for('home', function ($trail) {
             $trail->push('Home', url('/'));
         });
 
         try {
-            Breadcrumbs::render('home');
+            Crumbs::render('home');
             $this->fail('No exception thrown');
         } catch (ViewNotSetException $e) {
             $this->assertSolutionMatchesSnapshot($e);
@@ -99,7 +99,7 @@ class IgnitionTest extends TestCase
     public function testUnnamedClosureRouteSolution()
     {
         Route::get('/blog', function () {
-            return Breadcrumbs::render();
+            return Crumbs::render();
         });
 
         try {

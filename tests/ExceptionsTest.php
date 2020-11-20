@@ -1,8 +1,8 @@
 <?php
 
-namespace Diglactic\Breadcrumbs\Tests;
+namespace AlexanderWM\Crumbs\Tests;
 
-use Diglactic\Breadcrumbs\Breadcrumbs;
+use AlexanderWM\Crumbs\Crumbs;
 use Illuminate\Support\Facades\Config;
 
 class ExceptionsTest extends TestCase
@@ -12,28 +12,28 @@ class ExceptionsTest extends TestCase
 
     public function testDuplicateBreadcrumbException()
     {
-        $this->expectException(\Diglactic\Breadcrumbs\Exceptions\DuplicateBreadcrumbException::class);
+        $this->expectException(\AlexanderWM\Crumbs\Exceptions\DuplicateBreadcrumbException::class);
         $this->expectExceptionMessage('Breadcrumb name "duplicate" has already been registered');
 
-        Breadcrumbs::for('duplicate', function () {
+        Crumbs::for('duplicate', function () {
         });
-        Breadcrumbs::for('duplicate', function () {
+        Crumbs::for('duplicate', function () {
         });
     }
 
     public function testInvalidBreadcrumbException()
     {
-        $this->expectException(\Diglactic\Breadcrumbs\Exceptions\InvalidBreadcrumbException::class);
+        $this->expectException(\AlexanderWM\Crumbs\Exceptions\InvalidBreadcrumbException::class);
         $this->expectExceptionMessage('Breadcrumb not found with name "invalid"');
 
-        Breadcrumbs::render('invalid');
+        Crumbs::render('invalid');
     }
 
     public function testInvalidBreadcrumbExceptionDisabled()
     {
         Config::set('breadcrumbs.invalid-named-breadcrumb-exception', false);
 
-        $html = Breadcrumbs::render('invalid')->toHtml();
+        $html = Crumbs::render('invalid')->toHtml();
 
         $this->assertXmlStringEqualsXmlString('
             <p>No breadcrumbs</p>
@@ -42,15 +42,15 @@ class ExceptionsTest extends TestCase
 
     public function testViewNotSetException()
     {
-        $this->expectException(\Diglactic\Breadcrumbs\Exceptions\ViewNotSetException::class);
-        $this->expectExceptionMessage('Breadcrumbs view not specified (check config/breadcrumbs.php)');
+        $this->expectException(\AlexanderWM\Crumbs\Exceptions\ViewNotSetException::class);
+        $this->expectExceptionMessage('Crumbs view not specified (check config/breadcrumbs.php)');
 
         Config::set('breadcrumbs.view', '');
 
-        Breadcrumbs::for('home', function ($trail) {
+        Crumbs::for('home', function ($trail) {
             $trail->push('Home', url('/'));
         });
 
-        Breadcrumbs::render('home');
+        Crumbs::render('home');
     }
 }

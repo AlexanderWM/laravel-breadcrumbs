@@ -1,6 +1,6 @@
 <?php
 
-namespace Diglactic\Breadcrumbs\Exceptions;
+namespace AlexanderWM\Crumbs\Exceptions;
 
 use Facade\IgnitionContracts\BaseSolution;
 use Facade\IgnitionContracts\ProvidesSolution;
@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 /**
  * Exception that is thrown if the user attempts to register two breadcrumbs with the same name.
  *
- * @see \Diglactic\Breadcrumbs\ServiceProvider::register()
+ * @see \AlexanderWM\Crumbs\ServiceProvider::register()
  */
 class DuplicateBreadcrumbException extends BaseException implements ProvidesSolution
 {
@@ -40,8 +40,8 @@ class DuplicateBreadcrumbException extends BaseException implements ProvidesSolu
         }
 
         $links = [];
-        $links['Defining breadcrumbs'] = 'https://github.com/diglactic/laravel-breadcrumbs#defining-breadcrumbs';
-        $links['Laravel Breadcrumbs documentation'] = 'https://github.com/diglactic/laravel-breadcrumbs#laravel-breadcrumbs';
+        $links['Defining breadcrumbs'] = 'https://github.com/AlexanderWM/laravel-breadcrumbs#defining-breadcrumbs';
+        $links['Laravel Crumbs documentation'] = 'https://github.com/AlexanderWM/laravel-breadcrumbs#laravel-breadcrumbs';
 
         return BaseSolution::create('Remove the duplicate breadcrumb')
             ->setSolutionDescription($description)

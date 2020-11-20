@@ -1,8 +1,8 @@
 <?php
 
-namespace Diglactic\Breadcrumbs\Tests;
+namespace AlexanderWM\Crumbs\Tests;
 
-use Diglactic\Breadcrumbs\Breadcrumbs;
+use AlexanderWM\Crumbs\Crumbs;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\Route;
 use LogicException;
@@ -20,14 +20,14 @@ class BasicFunctionalityTest extends TestCase
         // Home
         Route::name('home')->get('/', $closure);
 
-        Breadcrumbs::for('home', function ($trail) {
+        Crumbs::for('home', function ($trail) {
             $trail->push('Home', route('home'));
         });
 
         // Home > About
         Route::name('about')->get('about', $closure);
 
-        Breadcrumbs::for('about', function ($trail) {
+        Crumbs::for('about', function ($trail) {
             $trail->parent('home');
             $trail->push('About', route('about'));
         });
@@ -35,7 +35,7 @@ class BasicFunctionalityTest extends TestCase
         // Home > Blog
         Route::name('blog')->get('blog', $closure);
 
-        Breadcrumbs::for('blog', function ($trail) {
+        Crumbs::for('blog', function ($trail) {
             $trail->parent('home');
             $trail->push('Blog', route('blog'));
         });
@@ -43,7 +43,7 @@ class BasicFunctionalityTest extends TestCase
         // Home > Blog > [Category]
         Route::name('category')->get('blog/category/{category}', $closure);
 
-        Breadcrumbs::for('category', function ($trail, $category) {
+        Crumbs::for('category', function ($trail, $category) {
             $trail->parent('blog');
             $trail->push($category->title, route('category', $category->id));
         });
@@ -51,7 +51,7 @@ class BasicFunctionalityTest extends TestCase
         // Home > Blog > [Category] > [Post]
         Route::name('post')->get('blog/post/{post}', $closure);
 
-        Breadcrumbs::for('post', function ($trail, $post) {
+        Crumbs::for('post', function ($trail, $post) {
             $trail->parent('category', $post->category);
             $trail->push($post->title, route('post', $post->id));
         });
@@ -70,7 +70,7 @@ class BasicFunctionalityTest extends TestCase
 
     public function testGenerate()
     {
-        $breadcrumbs = Breadcrumbs::generate('post', $this->post);
+        $breadcrumbs = Crumbs::generate('post', $this->post);
 
         $this->assertCount(4, $breadcrumbs);
 
@@ -89,7 +89,7 @@ class BasicFunctionalityTest extends TestCase
 
     public function testRenderHome()
     {
-        $rendered = Breadcrumbs::render('home');
+        $rendered = Crumbs::render('home');
         $html = $rendered->toHtml();
 
         $this->assertInstanceOf(Htmlable::class, $rendered);
@@ -103,7 +103,7 @@ class BasicFunctionalityTest extends TestCase
 
     public function testRenderBlog()
     {
-        $html = Breadcrumbs::render('blog')->toHtml();
+        $html = Crumbs::render('blog')->toHtml();
 
         $this->assertXmlStringEqualsXmlString('
             <ol>
@@ -115,7 +115,7 @@ class BasicFunctionalityTest extends TestCase
 
     public function testRenderCategory()
     {
-        $html = Breadcrumbs::render('category', $this->category)->toHtml();
+        $html = Crumbs::render('category', $this->category)->toHtml();
 
         $this->assertXmlStringEqualsXmlString('
             <ol>
@@ -128,7 +128,7 @@ class BasicFunctionalityTest extends TestCase
 
     public function testRenderPost()
     {
-        $html = Breadcrumbs::render('post', $this->post)->toHtml();
+        $html = Crumbs::render('post', $this->post)->toHtml();
 
         $this->assertXmlStringEqualsXmlString('
             <ol>

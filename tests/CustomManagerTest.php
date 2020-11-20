@@ -1,9 +1,9 @@
 <?php
 
-namespace Diglactic\Breadcrumbs\Tests;
+namespace AlexanderWM\Crumbs\Tests;
 
-use Diglactic\Breadcrumbs\Breadcrumbs;
-use Diglactic\Breadcrumbs\Manager;
+use AlexanderWM\Crumbs\Crumbs;
+use AlexanderWM\Crumbs\Manager;
 use Illuminate\Support\Collection;
 
 class CustomManagerTest extends TestCase
@@ -13,18 +13,18 @@ class CustomManagerTest extends TestCase
         parent::resolveApplicationConfiguration($app);
 
         // Need to inject this early, before the package is loaded, to simulate it being set in the config file
-        $app['config']['breadcrumbs.manager-class'] = CustomBreadcrumbs::class;
+        $app['config']['breadcrumbs.manager-class'] = CustomCrumbs::class;
     }
 
     public function testCustomManager()
     {
-        $breadcrumbs = Breadcrumbs::generate();
+        $breadcrumbs = Crumbs::generate();
 
         $this->assertSame('custom-manager', $breadcrumbs[0]);
     }
 }
 
-class CustomBreadcrumbs extends Manager
+class CustomCrumbs extends Manager
 {
     public function generate(string $name = null, ...$params): Collection
     {

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Diglactic\Breadcrumbs\Breadcrumbs;
-use Diglactic\Breadcrumbs\Tests\Models\Post;
+use AlexanderWM\Crumbs\Crumbs;
+use AlexanderWM\Crumbs\Tests\Models\Post;
 
 class PostController
 {
     public function edit(Post $post)
     {
-        return Breadcrumbs::render();
+        return Crumbs::render();
     }
 }

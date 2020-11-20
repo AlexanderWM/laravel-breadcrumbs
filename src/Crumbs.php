@@ -1,11 +1,11 @@
 <?php
 
-namespace Diglactic\Breadcrumbs;
+namespace AlexanderWM\Crumbs;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * Breadcrumbs facade - allows easy access to the Manager instance.
+ * Crumbs facade - allows easy access to the Manager instance.
  *
  * @method static void for(string $name, callable $callback)
  * @method static void register(string $name, callable $callback)
@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Facade;
  * @mixin \Illuminate\Support\Traits\Macroable
  * @see Manager
  */
-class Breadcrumbs extends Facade
+class Crumbs extends Facade
 {
     /**
      * Get the name of the class registered in the Application container.

@@ -1,6 +1,6 @@
 <?php
 
-namespace Diglactic\Breadcrumbs\Tests;
+namespace AlexanderWM\Crumbs\Tests;
 
 class AliasTest extends TestCase
 {
@@ -10,10 +10,10 @@ class AliasTest extends TestCase
         // @see https://github.com/davejamesmiller/laravel-breadcrumbs/blob/master/README.md
         foreach (
             [
-                \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager::class,
-                \DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator::class,
-                \DaveJamesMiller\Breadcrumbs\BreadcrumbsServiceProvider::class,
-                \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs::class,
+                \DaveJamesMiller\Crumbs\CrumbsManager::class,
+                \DaveJamesMiller\Crumbs\CrumbsGenerator::class,
+                \DaveJamesMiller\Crumbs\CrumbsServiceProvider::class,
+                \DaveJamesMiller\Crumbs\Facades\Crumbs::class,
             ]
             as $deprecatedClassReferencedInREADME
         ) {

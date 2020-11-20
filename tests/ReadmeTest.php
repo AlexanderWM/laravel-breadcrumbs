@@ -1,6 +1,6 @@
 <?php
 
-namespace Diglactic\Breadcrumbs\Tests;
+namespace AlexanderWM\Crumbs\Tests;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;

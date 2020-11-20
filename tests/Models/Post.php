@@ -1,6 +1,6 @@
 <?php
 
-namespace Diglactic\Breadcrumbs\Tests\Models;
+namespace AlexanderWM\Crumbs\Tests\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

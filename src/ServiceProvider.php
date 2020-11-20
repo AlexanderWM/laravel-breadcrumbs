@@ -1,6 +1,6 @@
 <?php
 
-namespace Diglactic\Breadcrumbs;
+namespace AlexanderWM\Crumbs;
 
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
@@ -54,7 +54,7 @@ class ServiceProvider extends BaseServiceProvider implements DeferrableProvider
         ], 'breadcrumbs-config');
 
         // Load the routes/breadcrumbs.php file
-        $this->registerBreadcrumbs();
+        $this->registerCrumbs();
     }
 
     /**
@@ -66,7 +66,7 @@ class ServiceProvider extends BaseServiceProvider implements DeferrableProvider
      * @return void
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function registerBreadcrumbs(): void
+    public function registerCrumbs(): void
     {
         // Load the routes/breadcrumbs.php file, or other configured file(s)
         $files = config('breadcrumbs.files');
@@ -80,7 +80,7 @@ class ServiceProvider extends BaseServiceProvider implements DeferrableProvider
             return;
         }
 
-        // Support both Breadcrumbs:: and $breadcrumbs-> syntax by making $breadcrumbs variable available
+        // Support both Crumbs:: and $breadcrumbs-> syntax by making $breadcrumbs variable available
         /** @noinspection PhpUnusedLocalVariableInspection */
         $breadcrumbs = $this->app->make(Manager::class);
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Diglactic\Breadcrumbs\Tests;
+namespace AlexanderWM\Crumbs\Tests;
 
-use Diglactic\Breadcrumbs\Breadcrumbs;
+use AlexanderWM\Crumbs\Crumbs;
 use Illuminate\Contracts\Console\Kernel;
 use LogicException;
 
@@ -30,7 +30,7 @@ class DeferredLoadingTest extends TestCase
 
         // This triggers the service provider boot, which loads the breadcrumbs,
         // which throws an exception, which is caught by PHPUnit.
-        Breadcrumbs::clearCurrentRoute();
+        Crumbs::clearCurrentRoute();
     }
 }
 

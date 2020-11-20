@@ -1,9 +1,9 @@
 <?php
 
-namespace Diglactic\Breadcrumbs\Tests;
+namespace AlexanderWM\Crumbs\Tests;
 
-use Diglactic\Breadcrumbs\Breadcrumbs;
-use Diglactic\Breadcrumbs\Tests\Models\Post;
+use AlexanderWM\Crumbs\Crumbs;
+use AlexanderWM\Crumbs\Tests\Models\Post;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
@@ -16,16 +16,16 @@ class RouteBoundTest extends TestCase
         Route::name('home')->get('/', function () {
         });
 
-        Breadcrumbs::for('home', function ($trail) {
+        Crumbs::for('home', function ($trail) {
             $trail->push('Home', route('home'));
         });
 
         // Home > [Post]
         Route::name('post')->get('/post/{id}', function () {
-            return Breadcrumbs::render();
+            return Crumbs::render();
         });
 
-        Breadcrumbs::for('post', function ($trail, $id) {
+        Crumbs::for('post', function ($trail, $id) {
             $post = Post::findOrFail($id);
             $trail->parent('home');
             $trail->push($post->title, route('post', $post));
@@ -47,16 +47,16 @@ class RouteBoundTest extends TestCase
         Route::name('home')->get('/', function () {
         });
 
-        Breadcrumbs::for('home', function ($trail) {
+        Crumbs::for('home', function ($trail) {
             $trail->push('Home', route('home'));
         });
 
         // Home > [Post]
         Route::name('post')->get('/post/{id}', function () use (&$breadcrumbs) {
-            $breadcrumbs = Breadcrumbs::generate();
+            $breadcrumbs = Crumbs::generate();
         });
 
-        Breadcrumbs::for('post', function ($trail, $id) {
+        Crumbs::for('post', function ($trail, $id) {
             $post = Post::findOrFail($id);
             $trail->parent('home');
             $trail->push($post->title, route('post', $post));
@@ -79,16 +79,16 @@ class RouteBoundTest extends TestCase
         Route::name('home')->get('/', function () {
         });
 
-        Breadcrumbs::for('home', function ($breadcrumbs) {
+        Crumbs::for('home', function ($breadcrumbs) {
             $breadcrumbs->push('Home', route('home'));
         });
 
         // Home > [Post]
         Route::name('post')->get('/post/{id}', function () {
-            return Breadcrumbs::view('breadcrumbs2');
+            return Crumbs::view('breadcrumbs2');
         });
 
-        Breadcrumbs::for('post', function ($breadcrumbs, $id) {
+        Crumbs::for('post', function ($breadcrumbs, $id) {
             $post = Post::findOrFail($id);
             $breadcrumbs->parent('home');
             $breadcrumbs->push($post->title, route('post', $post));
@@ -107,11 +107,11 @@ class RouteBoundTest extends TestCase
     public function testExists()
     {
         // Exists
-        Breadcrumbs::for('exists', function () {
+        Crumbs::for('exists', function () {
         });
 
         Route::name('exists')->get('/exists', function () use (&$exists1) {
-            $exists1 = Breadcrumbs::exists();
+            $exists1 = Crumbs::exists();
         });
 
         $this->get('/exists');
@@ -119,7 +119,7 @@ class RouteBoundTest extends TestCase
 
         // Doesn't exist
         Route::name('doesnt-exist')->get('/doesnt-exist', function () use (&$exists2) {
-            $exists2 = Breadcrumbs::exists();
+            $exists2 = Crumbs::exists();
         });
 
         $this->get('/doesnt-exist');
@@ -127,7 +127,7 @@ class RouteBoundTest extends TestCase
 
         // Unnamed
         Route::get('/unnamed', function () use (&$exists3) {
-            $exists3 = Breadcrumbs::exists();
+            $exists3 = Crumbs::exists();
         });
 
         $this->get('/unnamed');
@@ -139,11 +139,11 @@ class RouteBoundTest extends TestCase
         Route::name('home')->get('/', function () {
         });
 
-        Breadcrumbs::for('home', function ($breadcrumbs) {
+        Crumbs::for('home', function ($breadcrumbs) {
             $breadcrumbs->push('Home', route('home'));
         });
 
-        Breadcrumbs::for('errors.404', function ($breadcrumbs) {
+        Crumbs::for('errors.404', function ($breadcrumbs) {
             $breadcrumbs->parent('home');
             $breadcrumbs->push('Not Found');
         });
@@ -162,11 +162,11 @@ class RouteBoundTest extends TestCase
 
     public function testMissingBreadcrumbException()
     {
-        $this->expectException(\Diglactic\Breadcrumbs\Exceptions\InvalidBreadcrumbException::class);
+        $this->expectException(\AlexanderWM\Crumbs\Exceptions\InvalidBreadcrumbException::class);
         $this->expectExceptionMessage('Breadcrumb not found with name "home"');
 
         Route::name('home')->get('/', function () {
-            return Breadcrumbs::render();
+            return Crumbs::render();
         });
 
         $this->get('/');
@@ -177,7 +177,7 @@ class RouteBoundTest extends TestCase
         Config::set('breadcrumbs.missing-route-bound-breadcrumb-exception', false);
 
         Route::name('home')->get('/', function () {
-            return Breadcrumbs::render();
+            return Crumbs::render();
         });
 
         $html = $this->get('/')->content();
@@ -189,11 +189,11 @@ class RouteBoundTest extends TestCase
 
     public function testUnnamedRouteException()
     {
-        $this->expectException(\Diglactic\Breadcrumbs\Exceptions\UnnamedRouteException::class);
+        $this->expectException(\AlexanderWM\Crumbs\Exceptions\UnnamedRouteException::class);
         $this->expectExceptionMessage('The current route (GET /blog) is not named');
 
         Route::get('/blog', function () {
-            return Breadcrumbs::render();
+            return Crumbs::render();
         });
 
         $this->get('/blog');
@@ -201,12 +201,12 @@ class RouteBoundTest extends TestCase
 
     public function testUnnamedHomeRouteException()
     {
-        $this->expectException(\Diglactic\Breadcrumbs\Exceptions\UnnamedRouteException::class);
+        $this->expectException(\AlexanderWM\Crumbs\Exceptions\UnnamedRouteException::class);
         $this->expectExceptionMessage('The current route (GET /) is not named');
 
         // Make sure the message is "GET /" not "GET //"
         Route::get('/', function () {
-            return Breadcrumbs::render();
+            return Crumbs::render();
         });
 
         $this->get('/');
@@ -217,7 +217,7 @@ class RouteBoundTest extends TestCase
         Config::set('breadcrumbs.unnamed-route-exception', false);
 
         Route::get('/', function () {
-            return Breadcrumbs::render();
+            return Crumbs::render();
         });
 
         $html = $this->get('/')->content();
@@ -233,7 +233,7 @@ class RouteBoundTest extends TestCase
         Route::name('home')->get('/', function () {
         });
 
-        Breadcrumbs::for('home', function ($breadcrumbs) {
+        Crumbs::for('home', function ($breadcrumbs) {
             $breadcrumbs->push('Home', route('home'));
         });
 
@@ -241,10 +241,10 @@ class RouteBoundTest extends TestCase
         Route::model('post', Post::class);
 
         Route::name('post')->middleware(SubstituteBindings::class)->get('/post/{post}', function ($post) {
-            return Breadcrumbs::render();
+            return Crumbs::render();
         });
 
-        Breadcrumbs::for('post', function ($breadcrumbs, $post) {
+        Crumbs::for('post', function ($breadcrumbs, $post) {
             $breadcrumbs->parent('home');
             $breadcrumbs->push($post->title, route('post', $post));
         });
@@ -265,16 +265,16 @@ class RouteBoundTest extends TestCase
         Route::name('home')->get('/', function () {
         });
 
-        Breadcrumbs::for('home', function ($breadcrumbs) {
+        Crumbs::for('home', function ($breadcrumbs) {
             $breadcrumbs->push('Home', route('home'));
         });
 
         // Home > [Post]
         Route::name('post')->middleware(SubstituteBindings::class)->get('/post/{post}', function (Post $post) {
-            return Breadcrumbs::render();
+            return Crumbs::render();
         });
 
-        Breadcrumbs::for('post', function ($breadcrumbs, $post) {
+        Crumbs::for('post', function ($breadcrumbs, $post) {
             $breadcrumbs->parent('home');
             $breadcrumbs->push($post->title, route('post', $post));
         });
@@ -294,24 +294,24 @@ class RouteBoundTest extends TestCase
         Route::middleware(SubstituteBindings::class)->resource('post', 'App\Http\Controllers\PostController');
 
         // Posts
-        Breadcrumbs::for('post.index', function ($breadcrumbs) {
+        Crumbs::for('post.index', function ($breadcrumbs) {
             $breadcrumbs->push('Posts', route('post.index'));
         });
 
         // Posts > Upload Post
-        Breadcrumbs::for('post.create', function ($breadcrumbs) {
+        Crumbs::for('post.create', function ($breadcrumbs) {
             $breadcrumbs->parent('post.index');
             $breadcrumbs->push('New Post', route('post.create'));
         });
 
         // Posts > [Post Name]
-        Breadcrumbs::for('post.show', function ($breadcrumbs, Post $post) {
+        Crumbs::for('post.show', function ($breadcrumbs, Post $post) {
             $breadcrumbs->parent('post.index');
             $breadcrumbs->push($post->title, route('post.show', $post->id));
         });
 
         // Posts > [Post Name] > Edit Post
-        Breadcrumbs::for('post.edit', function ($breadcrumbs, Post $post) {
+        Crumbs::for('post.edit', function ($breadcrumbs, Post $post) {
             $breadcrumbs->parent('post.show', $post);
             $breadcrumbs->push('Edit Post', route('post.edit', $post->id));
         });

@@ -7,7 +7,7 @@ return [
     | View Name
     |--------------------------------------------------------------------------
     |
-    | Choose a view to display when Breadcrumbs::render() is called.
+    | Choose a view to display when Crumbs::render() is called.
     | Built in templates are:
     |
     | - 'breadcrumbs::bootstrap4'  - Bootstrap 4
@@ -28,7 +28,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Breadcrumbs File(s)
+    | Crumbs File(s)
     |--------------------------------------------------------------------------
     |
     | The file(s) where breadcrumbs are defined. e.g.
@@ -68,9 +68,9 @@ return [
     */
 
     // Manager
-    'manager-class' => Diglactic\Breadcrumbs\Manager::class,
+    'manager-class' => AlexanderWM\Crumbs\Manager::class,
 
     // Generator
-    'generator-class' => Diglactic\Breadcrumbs\Generator::class,
+    'generator-class' => AlexanderWM\Crumbs\Generator::class,
 
 ];

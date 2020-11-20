@@ -1,6 +1,6 @@
 <?php
 
-namespace Diglactic\Breadcrumbs\Exceptions;
+namespace AlexanderWM\Crumbs\Exceptions;
 
 use Facade\IgnitionContracts\BaseSolution;
 use Facade\IgnitionContracts\ProvidesSolution;
@@ -50,19 +50,19 @@ class InvalidBreadcrumbException extends BaseException implements ProvidesSoluti
         }
 
         $links = [];
-        $links['Defining breadcrumbs'] = 'https://github.com/diglactic/laravel-breadcrumbs#defining-breadcrumbs';
+        $links['Defining breadcrumbs'] = 'https://github.com/AlexanderWM/laravel-breadcrumbs#defining-breadcrumbs';
 
         if ($this->isRouteBound) {
-            $links['Route-bound breadcrumbs'] = 'https://github.com/diglactic/laravel-breadcrumbs#route-bound-breadcrumbs';
+            $links['Route-bound breadcrumbs'] = 'https://github.com/AlexanderWM/laravel-breadcrumbs#route-bound-breadcrumbs';
         }
 
-        $links['Silencing breadcrumb exceptions'] = 'https://github.com/diglactic/laravel-breadcrumbs#configuration-file';
-        $links['Laravel Breadcrumbs documentation'] = 'https://github.com/diglactic/laravel-breadcrumbs#laravel-breadcrumbs';
+        $links['Silencing breadcrumb exceptions'] = 'https://github.com/AlexanderWM/laravel-breadcrumbs#configuration-file';
+        $links['Laravel Crumbs documentation'] = 'https://github.com/AlexanderWM/laravel-breadcrumbs#laravel-breadcrumbs';
 
         return BaseSolution::create("Add this to $file")
             ->setSolutionDescription("
 ```php
-Breadcrumbs::for('{$this->name}', function (\$trail) {
+Crumbs::for('{$this->name}', function (\$trail) {
     \$trail->push('Title Here', $url);
 });
 ```")

@@ -1,3 +1,3 @@
 <nav>
-    {{ Breadcrumbs::render() }}
+    {{ Crumbs::render() }}
 </nav>

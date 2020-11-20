@@ -1,8 +1,8 @@
 <?php
 
-namespace Diglactic\Breadcrumbs\Tests;
+namespace AlexanderWM\Crumbs\Tests;
 
-use Diglactic\Breadcrumbs\Breadcrumbs;
+use AlexanderWM\Crumbs\Crumbs;
 
 class OutputTest extends TestCase
 {
@@ -11,18 +11,18 @@ class OutputTest extends TestCase
         parent::setUp();
 
         // Home (Normal link)
-        Breadcrumbs::for('home', function ($trail) {
+        Crumbs::for('home', function ($trail) {
             $trail->push('Home', url('/'));
         });
 
         // Home > Blog (Not a link)
-        Breadcrumbs::for('blog', function ($trail) {
+        Crumbs::for('blog', function ($trail) {
             $trail->parent('home');
             $trail->push('Blog');
         });
 
         // Home > Blog > [Category] (Active page)
-        Breadcrumbs::for('category', function ($trail, $category) {
+        Crumbs::for('category', function ($trail, $category) {
             $trail->parent('blog');
             $trail->push($category->title, url("blog/category/{$category->id}"));
         });
@@ -45,7 +45,7 @@ class OutputTest extends TestCase
 
     public function testBladeRender()
     {
-        // {{ Breadcrumbs::render('category', $category) }}
+        // {{ Crumbs::render('category', $category) }}
         $html = view('view-blade')->with('category', $this->category)->render();
 
         $this->assertXmlStringEqualsXmlString($this->expectedHtml, $html);
@@ -53,7 +53,7 @@ class OutputTest extends TestCase
 
     public function testBladeSection()
     {
-        // @section('breadcrumbs', Breadcrumbs::render('category', $category))
+        // @section('breadcrumbs', Crumbs::render('category', $category))
         $html = view('view-section')->with('category', $this->category)->render();
 
         $this->assertXmlStringEqualsXmlString($this->expectedHtml, $html);
@@ -61,7 +61,7 @@ class OutputTest extends TestCase
 
     public function testPhpRender()
     {
-        /* <?= Breadcrumbs::render('category', $category) ?> */
+        /* <?= Crumbs::render('category', $category) ?> */
         $html = view('view-php')->with('category', $this->category)->render();
 
         $this->assertXmlStringEqualsXmlString($this->expectedHtml, $html);

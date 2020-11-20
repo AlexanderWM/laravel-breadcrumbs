@@ -1,3 +1,3 @@
 <?php
 
-throw new LogicException('Breadcrumbs were loaded too early');
+throw new LogicException('Crumbs were loaded too early');

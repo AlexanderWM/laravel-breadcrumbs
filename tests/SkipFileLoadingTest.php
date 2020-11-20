@@ -1,6 +1,6 @@
 <?php
 
-namespace Diglactic\Breadcrumbs\Tests;
+namespace AlexanderWM\Crumbs\Tests;
 
 class SkipFileLoadingTest extends TestCase
 {
@@ -11,7 +11,7 @@ class SkipFileLoadingTest extends TestCase
         $app->config->set('breadcrumbs.files', []);
     }
 
-    /** @covers \Diglactic\Breadcrumbs\ServiceProvider::registerBreadcrumbs */
+    /** @covers \AlexanderWM\Crumbs\ServiceProvider::registerCrumbs */
     public function testLoading()
     {
         // I can't think of a way to actually test this since nothing is loaded -

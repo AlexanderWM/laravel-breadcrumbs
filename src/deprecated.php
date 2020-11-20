@@ -1,56 +1,56 @@
 <?php
 
-namespace Diglactic\Breadcrumbs;
+namespace AlexanderWM\Crumbs;
 
-use Diglactic\Breadcrumbs\Exceptions\BaseException;
-use Diglactic\Breadcrumbs\Exceptions\DuplicateBreadcrumbException;
-use Diglactic\Breadcrumbs\Exceptions\InvalidBreadcrumbException;
-use Diglactic\Breadcrumbs\Exceptions\UnnamedRouteException;
-use Diglactic\Breadcrumbs\Exceptions\ViewNotSetException;
+use AlexanderWM\Crumbs\Exceptions\BaseException;
+use AlexanderWM\Crumbs\Exceptions\DuplicateBreadcrumbException;
+use AlexanderWM\Crumbs\Exceptions\InvalidBreadcrumbException;
+use AlexanderWM\Crumbs\Exceptions\UnnamedRouteException;
+use AlexanderWM\Crumbs\Exceptions\ViewNotSetException;
 
-\class_alias(BaseException::class, \DaveJamesMiller\Breadcrumbs\BreadcrumbsException::class);
-\class_alias(Breadcrumbs::class, \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs::class);
-\class_alias(DuplicateBreadcrumbException::class, \DaveJamesMiller\Breadcrumbs\Exceptions\DuplicateBreadcrumbException::class);
-\class_alias(Generator::class, \DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator::class);
-\class_alias(InvalidBreadcrumbException::class, \DaveJamesMiller\Breadcrumbs\Exceptions\InvalidBreadcrumbException::class);
-\class_alias(Manager::class, \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager::class);
-\class_alias(ServiceProvider::class, \DaveJamesMiller\Breadcrumbs\BreadcrumbsServiceProvider::class);
-\class_alias(UnnamedRouteException::class, \DaveJamesMiller\Breadcrumbs\Exceptions\UnnamedRouteException::class);
-\class_alias(ViewNotSetException::class, \DaveJamesMiller\Breadcrumbs\Exceptions\ViewNotSetException::class);
-
-//
-
-namespace DaveJamesMiller\Breadcrumbs;
-
-if (!\class_exists(BreadcrumbsException::class)) {
-    /** @deprecated */
-    class BreadcrumbsException {}
-}
-if (!\class_exists(BreadcrumbsGenerator::class)) {
-    /** @deprecated */
-    class BreadcrumbsGenerator {}
-}
-if (!\class_exists(BreadcrumbsManager::class)) {
-    /** @deprecated */
-    class BreadcrumbsManager {}
-}
-if (!\class_exists(BreadcrumbsServiceProvider::class)) {
-    /** @deprecated */
-    class BreadcrumbsServiceProvider {}
-}
+\class_alias(BaseException::class, \DaveJamesMiller\Crumbs\CrumbsException::class);
+\class_alias(Crumbs::class, \DaveJamesMiller\Crumbs\Facades\Crumbs::class);
+\class_alias(DuplicateBreadcrumbException::class, \DaveJamesMiller\Crumbs\Exceptions\DuplicateBreadcrumbException::class);
+\class_alias(Generator::class, \DaveJamesMiller\Crumbs\CrumbsGenerator::class);
+\class_alias(InvalidBreadcrumbException::class, \DaveJamesMiller\Crumbs\Exceptions\InvalidBreadcrumbException::class);
+\class_alias(Manager::class, \DaveJamesMiller\Crumbs\CrumbsManager::class);
+\class_alias(ServiceProvider::class, \DaveJamesMiller\Crumbs\CrumbsServiceProvider::class);
+\class_alias(UnnamedRouteException::class, \DaveJamesMiller\Crumbs\Exceptions\UnnamedRouteException::class);
+\class_alias(ViewNotSetException::class, \DaveJamesMiller\Crumbs\Exceptions\ViewNotSetException::class);
 
 //
 
-namespace DaveJamesMiller\Breadcrumbs\Facades;
+namespace DaveJamesMiller\Crumbs;
 
-if (!\class_exists(Breadcrumbs::class)) {
+if (!\class_exists(CrumbsException::class)) {
     /** @deprecated */
-    class Breadcrumbs {}
+    class CrumbsException {}
+}
+if (!\class_exists(CrumbsGenerator::class)) {
+    /** @deprecated */
+    class CrumbsGenerator {}
+}
+if (!\class_exists(CrumbsManager::class)) {
+    /** @deprecated */
+    class CrumbsManager {}
+}
+if (!\class_exists(CrumbsServiceProvider::class)) {
+    /** @deprecated */
+    class CrumbsServiceProvider {}
 }
 
 //
 
-namespace DaveJamesMiller\Breadcrumbs\Exceptions;
+namespace DaveJamesMiller\Crumbs\Facades;
+
+if (!\class_exists(Crumbs::class)) {
+    /** @deprecated */
+    class Crumbs {}
+}
+
+//
+
+namespace DaveJamesMiller\Crumbs\Exceptions;
 
 if (!\class_exists(DuplicateBreadcrumbException::class)) {
     /** @deprecated */

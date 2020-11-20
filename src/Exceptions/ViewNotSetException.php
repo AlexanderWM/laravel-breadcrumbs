@@ -1,6 +1,6 @@
 <?php
 
-namespace Diglactic\Breadcrumbs\Exceptions;
+namespace AlexanderWM\Crumbs\Exceptions;
 
 use Facade\IgnitionContracts\BaseSolution;
 use Facade\IgnitionContracts\ProvidesSolution;
@@ -14,10 +14,10 @@ class ViewNotSetException extends BaseException implements ProvidesSolution
     public function getSolution(): Solution
     {
         $links = [];
-        $links['Choosing a breadcrumbs template (view)'] = 'https://github.com/diglactic/laravel-breadcrumbs#3-choose-a-template';
-        $links['Laravel Breadcrumbs documentation'] = 'https://github.com/diglactic/laravel-breadcrumbs#laravel-breadcrumbs';
+        $links['Choosing a breadcrumbs template (view)'] = 'https://github.com/AlexanderWM/laravel-breadcrumbs#3-choose-a-template';
+        $links['Laravel Crumbs documentation'] = 'https://github.com/AlexanderWM/laravel-breadcrumbs#laravel-breadcrumbs';
 
-        return BaseSolution::create('Set a view for Laravel Breadcrumbs')
+        return BaseSolution::create('Set a view for Laravel Crumbs')
             ->setSolutionDescription("Please check `config/breadcrumbs.php` for a valid `'view'` (e.g. `'breadcrumbs::bootstrap4'`)")
             ->setDocumentationLinks($links);
     }

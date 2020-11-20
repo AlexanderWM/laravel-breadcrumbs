@@ -1,9 +1,9 @@
 <?php
 
-namespace Diglactic\Breadcrumbs\Tests;
+namespace AlexanderWM\Crumbs\Tests;
 
-use Diglactic\Breadcrumbs\Breadcrumbs;
-use Diglactic\Breadcrumbs\ServiceProvider;
+use AlexanderWM\Crumbs\Crumbs;
+use AlexanderWM\Crumbs\ServiceProvider;
 
 class CustomChildServiceProviderTest extends TestCase
 {
@@ -16,7 +16,7 @@ class CustomChildServiceProviderTest extends TestCase
 
     public function testRender()
     {
-        $html = Breadcrumbs::render('home')->toHtml();
+        $html = Crumbs::render('home')->toHtml();
 
         $this->assertXmlStringEqualsXmlString('
             <ol>
@@ -28,9 +28,9 @@ class CustomChildServiceProviderTest extends TestCase
 
 class CustomChildServiceProvider extends ServiceProvider
 {
-    public function registerBreadcrumbs(): void
+    public function registerCrumbs(): void
     {
-        Breadcrumbs::for('home', function ($trail) {
+        Crumbs::for('home', function ($trail) {
             $trail->push('Home', '/');
         });
     }

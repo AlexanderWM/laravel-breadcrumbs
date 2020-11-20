@@ -1,11 +1,11 @@
 <?php
 
-namespace Diglactic\Breadcrumbs\Tests;
+namespace AlexanderWM\Crumbs\Tests;
 
-use Diglactic\Breadcrumbs\Breadcrumbs;
-use Diglactic\Breadcrumbs\Generator;
-use Diglactic\Breadcrumbs\Manager;
-use Diglactic\Breadcrumbs\ServiceProvider as BreadcrumbsServiceProvider;
+use AlexanderWM\Crumbs\Crumbs;
+use AlexanderWM\Crumbs\Generator;
+use AlexanderWM\Crumbs\Manager;
+use AlexanderWM\Crumbs\ServiceProvider as CrumbsServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
 class CustomPackageServiceProviderTest extends TestCase
@@ -13,14 +13,14 @@ class CustomPackageServiceProviderTest extends TestCase
     protected function getPackageProviders($app)
     {
         return [
-            BreadcrumbsServiceProvider::class,
+            CrumbsServiceProvider::class,
             CustomPackageServiceProvider::class,
         ];
     }
 
     public function testRender()
     {
-        $html = Breadcrumbs::render('home')->toHtml();
+        $html = Crumbs::render('home')->toHtml();
 
         $this->assertXmlStringEqualsXmlString('
             <ol>

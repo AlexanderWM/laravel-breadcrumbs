@@ -1,8 +1,8 @@
 <?php
 
-namespace Diglactic\Breadcrumbs\Tests;
+namespace AlexanderWM\Crumbs\Tests;
 
-use Diglactic\Breadcrumbs\Breadcrumbs;
+use AlexanderWM\Crumbs\Crumbs;
 
 class RecursionTest extends TestCase
 {
@@ -11,7 +11,7 @@ class RecursionTest extends TestCase
         parent::setUp();
 
         // Blog
-        Breadcrumbs::for('blog', function ($trail) {
+        Crumbs::for('blog', function ($trail) {
             $trail->push('Blog', url('/'));
         });
 
@@ -22,7 +22,7 @@ class RecursionTest extends TestCase
 
     public function testRepeatedPush()
     {
-        Breadcrumbs::for('category', function ($trail, $category) {
+        Crumbs::for('category', function ($trail, $category) {
             $trail->parent('blog');
 
             foreach ($category->ancestors as $ancestor) {
@@ -34,7 +34,7 @@ class RecursionTest extends TestCase
 
         $this->category3->ancestors = [$this->category1, $this->category2];
 
-        $html = Breadcrumbs::render('category', $this->category3)->toHtml();
+        $html = Crumbs::render('category', $this->category3)->toHtml();
 
         $this->assertXmlStringEqualsXmlString('
             <ol>
@@ -48,7 +48,7 @@ class RecursionTest extends TestCase
 
     public function testRecursiveCall()
     {
-        Breadcrumbs::for('category', function ($trail, $category) {
+        Crumbs::for('category', function ($trail, $category) {
             if ($category->parent) {
                 $trail->parent('category', $category->parent);
             } else {
@@ -62,7 +62,7 @@ class RecursionTest extends TestCase
         $this->category2->parent = $this->category1;
         $this->category3->parent = $this->category2;
 
-        $html = Breadcrumbs::render('category', $this->category3)->toHtml();
+        $html = Crumbs::render('category', $this->category3)->toHtml();
 
         $this->assertXmlStringEqualsXmlString('
             <ol>

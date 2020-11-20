@@ -1,9 +1,9 @@
 <?php
 
-namespace Diglactic\Breadcrumbs\Tests;
+namespace AlexanderWM\Crumbs\Tests;
 
-use Diglactic\Breadcrumbs\Breadcrumbs;
-use Diglactic\Breadcrumbs\Generator;
+use AlexanderWM\Crumbs\Crumbs;
+use AlexanderWM\Crumbs\Generator;
 use Illuminate\Support\Collection;
 
 class CustomGeneratorTest extends TestCase
@@ -18,7 +18,7 @@ class CustomGeneratorTest extends TestCase
 
     public function testCustomGenerator()
     {
-        $breadcrumbs = Breadcrumbs::generate();
+        $breadcrumbs = Crumbs::generate();
 
         $this->assertSame('custom-generator', $breadcrumbs[0]);
     }

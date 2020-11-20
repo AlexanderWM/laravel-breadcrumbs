@@ -1,6 +1,6 @@
 <?php
 
-namespace Diglactic\Breadcrumbs\Exceptions;
+namespace AlexanderWM\Crumbs\Exceptions;
 
 use Facade\IgnitionContracts\BaseSolution;
 use Facade\IgnitionContracts\ProvidesSolution;
@@ -46,9 +46,9 @@ class UnnamedRouteException extends BaseException implements ProvidesSolution
         }
 
         $links = [];
-        $links['Route-bound breadcrumbs'] = 'https://github.com/diglactic/laravel-breadcrumbs#route-bound-breadcrumbs';
-        $links['Silencing breadcrumb exceptions'] = 'https://github.com/diglactic/laravel-breadcrumbs#configuration-file';
-        $links['Laravel Breadcrumbs documentation'] = 'https://github.com/diglactic/laravel-breadcrumbs#laravel-breadcrumbs';
+        $links['Route-bound breadcrumbs'] = 'https://github.com/AlexanderWM/laravel-breadcrumbs#route-bound-breadcrumbs';
+        $links['Silencing breadcrumb exceptions'] = 'https://github.com/AlexanderWM/laravel-breadcrumbs#configuration-file';
+        $links['Laravel Crumbs documentation'] = 'https://github.com/AlexanderWM/laravel-breadcrumbs#laravel-breadcrumbs';
 
         return BaseSolution::create('Give the route a name')
             ->setSolutionDescription("For example:

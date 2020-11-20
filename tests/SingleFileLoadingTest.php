@@ -1,8 +1,8 @@
 <?php
 
-namespace Diglactic\Breadcrumbs\Tests;
+namespace AlexanderWM\Crumbs\Tests;
 
-use Diglactic\Breadcrumbs\Breadcrumbs;
+use AlexanderWM\Crumbs\Crumbs;
 
 class SingleFileLoadingTest extends TestCase
 {
@@ -15,7 +15,7 @@ class SingleFileLoadingTest extends TestCase
 
     public function testLoading()
     {
-        $html = Breadcrumbs::render('single-file-test')->toHtml();
+        $html = Crumbs::render('single-file-test')->toHtml();
 
         $this->assertXmlStringEqualsXmlString('
             <ol>

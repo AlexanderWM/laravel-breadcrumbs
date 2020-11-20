@@ -1,14 +1,14 @@
 {
-    "name": "diglactic/laravel-breadcrumbs",
+    "name": "AlexanderWM/laravel-breadcrumbs",
     "description": "A simple Laravel-style way to create breadcrumbs.",
     "keywords": [
         "laravel"
     ],
-    "homepage": "https://github.com/diglactic/laravel-breadcrumbs",
+    "homepage": "https://github.com/AlexanderWM/laravel-breadcrumbs",
     "authors": [
         {
             "name": "Sheng Slogar",
-            "email": "sheng@diglactic.com",
+            "email": "sheng@AlexanderWM.com",
             "role": "Maintainer"
         },
         {
@@ -33,7 +33,7 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Diglactic\\Breadcrumbs\\": "src/"
+            "AlexanderWM\\Crumbs\\": "src/"
         },
         "files": [
             "src/deprecated.php"
@@ -42,16 +42,16 @@
     "autoload-dev": {
         "psr-4": {
             "App\\Http\\": "tests/Http/",
-            "Diglactic\\Breadcrumbs\\Tests\\": "tests/"
+            "AlexanderWM\\Crumbs\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Diglactic\\Breadcrumbs\\ServiceProvider"
+                "AlexanderWM\\Crumbs\\ServiceProvider"
             ],
             "aliases": {
-                "Breadcrumbs": "Diglactic\\Breadcrumbs\\Breadcrumbs"
+                "Crumbs": "AlexanderWM\\Crumbs\\Crumbs"
             }
         }
     }

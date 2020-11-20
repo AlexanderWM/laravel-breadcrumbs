@@ -1,8 +1,8 @@
 <?php
 
-namespace Diglactic\Breadcrumbs\Tests;
+namespace AlexanderWM\Crumbs\Tests;
 
-use Diglactic\Breadcrumbs\Breadcrumbs;
+use AlexanderWM\Crumbs\Crumbs;
 use Generator;
 
 class TemplatesTest extends TestCase
@@ -12,18 +12,18 @@ class TemplatesTest extends TestCase
         parent::setUp();
 
         // Home (Normal link)
-        Breadcrumbs::for('home', function ($trail) {
+        Crumbs::for('home', function ($trail) {
             $trail->push('Home', url('/'));
         });
 
         // Home > Blog (Not a link)
-        Breadcrumbs::for('blog', function ($trail) {
+        Crumbs::for('blog', function ($trail) {
             $trail->parent('home');
             $trail->push('Blog');
         });
 
         // Home > Blog > [Category] (Active page)
-        Breadcrumbs::for('category', function ($trail, $category) {
+        Crumbs::for('category', function ($trail, $category) {
             $trail->parent('blog');
             $trail->push($category->title, url("blog/category/{$category->id}"));
         });
@@ -45,7 +45,7 @@ class TemplatesTest extends TestCase
     /** @dataProvider viewProvider */
     public function testView($view)
     {
-        $html = Breadcrumbs::view("breadcrumbs::$view", 'category', $this->category)->toHtml();
+        $html = Crumbs::view("breadcrumbs::$view", 'category', $this->category)->toHtml();
 
         $this->assertMatchesXmlSnapshot($html);
     }
